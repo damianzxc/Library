@@ -6,6 +6,7 @@
 .settings/
 *.xml
 target/
+WebContent/
 
 # Log file
 *.log
