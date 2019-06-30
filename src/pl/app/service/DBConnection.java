@@ -1,14 +1,13 @@
-package service;
+package pl.app.service;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-
 	private static DBConnection instance;
 	private Connection conn;
-	private String url = "jdbc:postgresql://localhost:5432/library-test";
+	private String url = "jdbc:postgresql://localhost:5432/postgres";
 	private String username = "postgres";
 	private String password = "admin";
 
@@ -35,5 +34,4 @@ public class DBConnection {
 		}
 		return instance;
 	}
-
 }

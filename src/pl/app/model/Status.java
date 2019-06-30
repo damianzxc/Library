@@ -1,9 +1,9 @@
-package model;
+package pl.app.model;
 
 public enum Status {
 	
 	AVAILABLE,
-	LOANED;
+	NOT_AVAILABLE;
 	
 	@Override
 	public String toString() {

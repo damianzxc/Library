@@ -1,20 +1,21 @@
-package model;
+package pl.app.model;
 
 import java.time.LocalDate;
 
 public class Book {
 
-	private Long id;
+	private String id;
 	private String name;
 	private String describe;
 	private String author;
 	private String publisher;
 	private LocalDate releaseDate;
 	private Status status;
-	public Long getId() {
+	
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -53,6 +54,4 @@ public class Book {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-	
-	
 }

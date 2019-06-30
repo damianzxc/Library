@@ -1,14 +1,15 @@
-package model;
+package pl.app.model;
 
 import java.time.LocalDate;
 
 public class Loan {
-
+	
 	private Book book;
 	private User user;
 	private LocalDate rentalDate;
 	private LocalDate expectedReturnDate;
 	private LocalDate realReturnDate;
+	
 	public Book getBook() {
 		return book;
 	}
@@ -39,6 +40,5 @@ public class Loan {
 	public void setRealReturnDate(LocalDate realReturnDate) {
 		this.realReturnDate = realReturnDate;
 	}
-	
-	
+
 }
