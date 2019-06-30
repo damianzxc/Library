@@ -4,9 +4,9 @@
 .metadata/
 *.project
 .settings/
-*.xml
 target/
-WebContent/
+WebContent/META-INF/
+WebContent/WEB-INF/
 
 # Log file
 *.log

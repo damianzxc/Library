@@ -1,0 +1,87 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style type="text/css">
+.ui-row-editor .ui-row-editor-pencil {
+	margin-left: 8px;
+}
+</style>
+</h:head>
+
+<h:body>
+
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:dataTable id="users" var="user" value="#{dtUserBean.users}"
+			editable="true" style="margin-bottom:20px">
+			<f:facet name="header">
+            Row Editing
+        </f:facet>
+
+			<p:ajax event="rowEdit" listener="#{dtUserBean.onRowEdit}"
+				update=":form:msgs" />
+			<p:ajax event="rowEditCancel" listener="#{dtUserBean.onRowCancel}"
+				update=":form:msgs" />
+
+			<p:column headerText="Id">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{user.id}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="modelInput" value="#{user.id}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Name">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{user.name}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{user.name}" style="width:100%" label="Name" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Surname">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{user.surname}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{user.surname}" style="width:100%" label="Surname" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Pesel">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{user.pesel}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{user.pesel}" style="width:100%" label="Pesel" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column style="width:35px">
+				<p:rowEditor />
+			</p:column>
+		</p:dataTable>
+
+
+	</h:form>
+
+
+
+
+</h:body>
+
+</html>
