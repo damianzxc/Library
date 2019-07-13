@@ -1,0 +1,93 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+
+<h:body>
+
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Users" url="users.xhtml" />
+			<p:submenu label="Books">
+				<p:menuitem value="Add new" url="book-form.xhtml" />
+				<p:menuitem value="All books" url="books.xhtml" />
+			</p:submenu>
+			<p:submenu label="Wypożyczenia">
+				<p:menuitem value="Nowe" url="find-user.xhtml" />
+				<p:menuitem value="Aktywne" url="loan-form.xhtml" />
+				<p:menuitem value="Historia wypożyczeń" url="loans-history.xhtml" />
+			</p:submenu>
+		</p:menubar>
+	</h:form>
+
+
+	<h:form rendered="#{userController.user.id != null}" id="form">
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:dataTable id="loans" var="loan" value="#{loanController.userLoans}"
+			style="margin-bottom:20px">
+			<f:facet name="header"> #{loanController.user.name} #{loanController.user.surname} -- Pesel: #{loanController.user.pesel}
+        </f:facet>
+
+			<p:column headerText="Id">
+				<h:outputText value="#{loan.book.id}" />
+			</p:column>
+
+			<p:column headerText="Tytuł">
+				<h:outputText value="#{loan.book.name}" />
+			</p:column>
+
+			<p:column headerText="Autor">
+				<h:outputText value="#{loan.book.author}" />
+			</p:column>
+
+			<p:column headerText="Do zwrotu">
+				<h:outputText value="#{loan.expectedReturnDate}" />
+			</p:column>
+
+			<p:column headerText="Do zwrotu">
+				<h:outputText value="#{loan.expectedReturnDate}" />
+			</p:column>
+			
+			<p:column headerText="Do zwrotu">
+				<h:outputText value="#{loan.expectedReturnDate}" />
+			</p:column>
+			
+			<p:column headerText="Do zwrotu">
+				<h:outputText value="#{loan.expectedReturnDate}" />
+			</p:column>
+
+		</p:dataTable>
+
+
+
+	</h:form>
+	<h:form rendered="#{loanController.user.id != null}" >
+		<h3>Podaj książkę do wypożyczenia</h3>
+		<p:inputText value="#{loanController.book.id}" placeholder="id" />
+		<p:inputText value="#{loanController.loan.expectedReturnDate}"
+			placeholder="data zwrotu">
+			<f:convertDateTime pattern="yyyy-MM-dd" />
+		</p:inputText>
+		<p:commandButton value="submit"
+			actionListener="#{loanController.newLoan}" />
+	</h:form>
+	<h:form rendered="#{loanController.user.id != null}" >
+		<h3>Dokonaj zwrotu</h3>
+		<p:inputText value="#{loanController.book.id}"
+			placeholder="id książki" />
+		<p:commandButton value="submit"
+			actionListener="#{loanController.newReturn}" />
+	</h:form>
+
+	<h:form rendered="#{loanController.user.id == null}" >
+		<h3>Brak aktywnego. Wpisz pesel aby wyszukać użytkowninka</h3>
+		<p:inputText value="#{loanController.user.pesel}" placeholder="Pesel" />
+		<p:commandButton value="submit"
+			actionListener="#{loanController.findUserByPesel}" />
+	</h:form>
+
+</h:body>
+</html>

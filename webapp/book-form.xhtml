@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Users" url="users.xhtml" />
+			<p:submenu label="Books">
+				<p:menuitem value="Add new" url="book-form.xhtml" />
+				<p:menuitem value="All books" url="books.xhtml" />
+			</p:submenu>
+			<p:submenu label="Loans">
+				<p:menuitem value="New loan" url="find-user.xhtml" />
+				<p:menuitem value="Active loan" url="loan-form.xhtml" />
+				<p:menuitem value="Loans history" url="loans-history.xhtml" />
+			</p:submenu>
+		</p:menubar>	
+	</h:form>
+	<h:form>
+		<h3>Dodaj nową książkę</h3>
+		<p:inputText value="#{bookController.book.name}" placeholder="Tytuł" /><br/>
+		<p:inputText value="#{bookController.book.author}" placeholder="Autor" /><br/>
+		<p:inputText value="#{bookController.book.publisher}" placeholder="Wydawnictwo" /><br/>
+		<p:inputText value="#{bookController.book.releaseDate}" placeholder="Data wydania">
+			<f:convertDateTime pattern="yyyy-MM-dd"/>
+		</p:inputText><br/>
+		<p:inputTextarea value="#{bookController.book.describe}" placeholder="Opis"/><br/>
+		
+		<p:commandButton value="submit" actionListener="#{bookController.addBook}"
+			action="books?faces-redirect=true" />
+
+	</h:form>
+
+</h:body>
+</html>

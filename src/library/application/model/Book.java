@@ -1,23 +1,17 @@
-package pl.app.model;
+package library.application.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
-public class Book {
-
-	private String id;
+public class Book extends BaseObject {
+	
 	private String name;
 	private String describe;
 	private String author;
 	private String publisher;
-	private LocalDate releaseDate;
+	private Date releaseDate;
 	private Status status;
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+	private Boolean active;
+
 	public String getName() {
 		return name;
 	}
@@ -42,16 +36,23 @@ public class Book {
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
-	public LocalDate getReleaseDate() {
+	public Date getReleaseDate() {
 		return releaseDate;
 	}
-	public void setReleaseDate(LocalDate releaseDate) {
+	public void setReleaseDate(Date releaseDate) {
 		this.releaseDate = releaseDate;
 	}
-	public Status getStatus() {
-		return status;
+	public String getStatus() {
+		return status.name();
 	}
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setStatus(String status) {
+		this.status = Status.valueOf(status);
 	}
+	public Boolean getActive() {
+		return active;
+	}
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+	
 }

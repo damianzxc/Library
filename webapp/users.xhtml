@@ -13,6 +13,21 @@
 
 <h:body>
 
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Users" url="users.xhtml" />
+			<p:submenu label="Books">
+				<p:menuitem value="Add new" url="book-form.xhtml" />
+				<p:menuitem value="All books" url="books.xhtml" />
+			</p:submenu>
+			<p:submenu label="Loans">
+				<p:menuitem value="New loan" url="find-user.xhtml" />
+				<p:menuitem value="Active loan" url="loan-form.xhtml" />
+				<p:menuitem value="Loans history" url="loans-history.xhtml" />
+			</p:submenu>
+		</p:menubar>
+	</h:form>
+
 	<h:form id="form">
 		<p:growl id="msgs" showDetail="true" />
 
@@ -55,7 +70,8 @@
 						<h:outputText value="#{user.surname}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{user.surname}" style="width:100%" label="Surname" />
+						<p:inputText value="#{user.surname}" style="width:100%"
+							label="Surname" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
@@ -66,20 +82,48 @@
 						<h:outputText value="#{user.pesel}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{user.pesel}" style="width:100%" label="Pesel" />
+						<p:inputText value="#{user.pesel}" style="width:100%"
+							label="Pesel" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
 
-			<p:column style="width:35px">
+			<p:column style="width:55px" headerText="Aktywny">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{user.active}" />
+					</f:facet>
+					<f:facet name="input">
+						<h:selectBooleanCheckbox value="#{user.active}" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+
+			<p:column style="width:35px" headerText="edit">
 				<p:rowEditor />
 			</p:column>
+
+<!-- 			<p:column style="width:35px" headerText="del"> -->
+<!-- 				<p:commandButton icon="ui-icon-trash" -->
+<!-- 					actionListener="#{dtUserBean.removeUser(user.id)}" -->
+<!-- 					update=":form:msgs" onclick="PF('form').update()" /> -->
+<!-- 			</p:column> -->
+
 		</p:dataTable>
 
 
+
 	</h:form>
+	<h:form>
+		<h3>Dodawanie nowego użytkownika</h3>
+		<p:inputText value="#{dtUserBean.user.name}" placeholder="Imię" />
+		<p:inputText value="#{dtUserBean.user.surname}" placeholder="Nazwisko" />
+		<p:inputText value="#{dtUserBean.user.pesel}" placeholder="Pesel" />
+		<p:commandButton value="submit" actionListener="#{dtUserBean.addUser}"
+			update=":form:msgs" onclick="PF('form').update()" />
 
-
+	</h:form>
 
 
 </h:body>

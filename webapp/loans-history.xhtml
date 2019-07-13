@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Users" url="users.xhtml" />
+			<p:submenu label="Books">
+				<p:menuitem value="Add new" url="book-form.xhtml" />
+				<p:menuitem value="All books" url="books.xhtml" />
+			</p:submenu>
+			<p:submenu label="Loans">
+				<p:menuitem value="New loan" url="find-user.xhtml" />
+				<p:menuitem value="Active loan" url="loan-form.xhtml" />
+				<p:menuitem value="Loans history" url="loans-history.xhtml" />
+			</p:submenu>
+		</p:menubar>
+	</h:form>
+
+	<h:form>
+		<p:dataTable var="loan" value="#{loanController.allLoans}" rows="10"
+			paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15">
+			<p:column headerText="Książka">
+				<h:outputText value="#{loan.book.name}" />
+			</p:column>
+
+			<p:column headerText="Autor">
+				<h:outputText value="#{loan.book.author}" />
+			</p:column>
+
+			<p:column headerText="Id książki">
+				<h:outputText value="#{loan.book.id}" />
+			</p:column>
+
+			<p:column headerText="Imię i nazwisko">
+				<h:outputText value="#{loan.user.name}" /> - 
+				<h:outputText value="#{loan.user.surname}" />
+			</p:column>
+			
+			<p:column headerText="Id użytkownika">
+				<h:outputText value="#{loan.user.id}" />
+			</p:column>
+			
+			<p:column headerText="Data wypożyczenia">
+				<h:outputText value="#{loan.rentalDate}" />
+			</p:column>
+			
+			<p:column headerText="Data zwrotu">
+				<h:outputText value="#{loan.realReturnDate}" />
+			</p:column>
+			<p:column headerText="Statut">
+				<h:outputText value="Do zwrotu" style="color:red"
+					rendered="#{loan.active}" />
+				<h:outputText value="Zwrócona" rendered="#{!loan.active}" />
+			</p:column>
+
+			<f:facet name="paginatorTopLeft">
+				<p:commandButton type="button" icon="pi pi-refresh" />
+			</f:facet>
+
+			<f:facet name="paginatorBottomRight">
+				<p:commandButton type="button" icon="pi pi-cloud-upload" />
+			</f:facet>
+
+		</p:dataTable>
+	</h:form>
+
+
+
+
+</h:body>
+</html>

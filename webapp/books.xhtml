@@ -1,0 +1,128 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:body>
+
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Users" url="users.xhtml" />
+			<p:submenu label="Books">
+				<p:menuitem value="Add new" url="book-form.xhtml" />
+				<p:menuitem value="All books" url="books.xhtml" />
+			</p:submenu>
+			<p:submenu label="Loans">
+				<p:menuitem value="New loan" url="find-user.xhtml" />
+				<p:menuitem value="Active loan" url="loan-form.xhtml" />
+				<p:menuitem value="Loans history" url="loans-history.xhtml" />
+			</p:submenu>
+		</p:menubar>
+	</h:form>
+
+
+
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:dataTable id="books" var="book" value="#{bookController.books}"
+			editable="true" style="margin-bottom:20px">
+			<f:facet name="header">
+            Books
+        </f:facet>
+
+			<p:ajax event="rowEdit" listener="#{bookController.onRowEdit}"
+				update=":form:msgs" />
+			<p:ajax event="rowEditCancel"
+				listener="#{bookController.onRowCancel}" update=":form:msgs" />
+
+			<p:column headerText="Id">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{book.id}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="modelInput" value="#{book.id}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Name">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{book.name}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{book.name}" style="width:100%" label="Name" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Author">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{book.author}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{book.author}" style="width:100%"
+							label="Author" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Publisher">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{book.publisher}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{book.publisher}" style="width:100%"
+							label="Publisher" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Release Date">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{book.releaseDate}">
+							<f:convertDateTime pattern="yyyy-MM-dd" />
+						</h:outputText>
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{book.releaseDate}" style="width:100%"
+							label="Release Date">
+							<f:convertDateTime pattern="yyyy-MM-dd" />
+						</p:inputText>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Status">
+				<h:outputText value="#{book.status}" />
+			</p:column>
+
+			<p:column style="width:55px" headerText="Aktywna?">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{book.active}" />
+					</f:facet>
+					<f:facet name="input">
+						<h:selectBooleanCheckbox value="#{book.active}" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column style="width:35px" headerText="edit">
+				<p:rowEditor />
+			</p:column>
+
+		</p:dataTable>
+
+	</h:form>
+
+</h:body>
+</html>

@@ -1,30 +1,12 @@
-package pl.app.model;
+package library.application.model;
 
-public class User {
+public class User extends BaseObject{
 	
-	private String id;
 	private String name;
 	private String surname;
 	private String pesel;
-	
-	public User() {
-		super();
-	}
-	
-	public User(String id, String name, String surname, String pesel) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.surname = surname;
-		this.pesel = pesel;
-	}
+	private Boolean active;
 
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	public String getName() {
 		return name;
 	}
@@ -42,6 +24,12 @@ public class User {
 	}
 	public void setPesel(String pesel) {
 		this.pesel = pesel;
+	}
+	public Boolean getActive() {
+		return active;
+	}
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 	
 }
