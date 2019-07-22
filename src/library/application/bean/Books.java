@@ -1,4 +1,4 @@
-package bean;
+package library.application.bean;
 
 import java.io.IOException;
 import java.io.Serializable;

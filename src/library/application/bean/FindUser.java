@@ -1,4 +1,4 @@
-package bean;
+package library.application.bean;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -23,7 +23,6 @@ public class FindUser implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		System.out.println("init from Find User Bean");
 		findSessionUser();
 	}
 
