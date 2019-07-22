@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<style type="text/css">
+.ui-row-editor .ui-row-editor-pencil {
+	margin-left: 8px;
+}
+</style>
+</h:head>
+<h:body>
+
+	<ui:insert name="menu">
+		<ui:include src="/WEB-INF/menu.xhtml" />
+	</ui:insert>
+
+	<h:form>
+		<p:panel header="Dodawanie nowego użytkownika">
+			
+			<h:panelGrid id="grid" columns="3" cellpadding="5">
+				<h:outputLabel for="name" value="Imię:" style="font-weight-bold" />
+				<p:inputText id="name" value="#{userFormBean.user.name}" required="true" label="Imię" >
+					<f:validateLength minimum="3" />
+				</p:inputText>
+				<p:message for="name" />
+
+				<h:outputLabel for="surname" value="Nazwisko:" style="font-weight-bold" />
+				<p:inputText id="surname" value="#{userFormBean.user.surname}" required="true" >
+					<f:validateLength minimum="3" />
+				</p:inputText>
+				<p:message for="surname" />
+
+				<h:outputLabel for="pesel" value="Pesel:" style="font-weight-bold" />
+				<p:inputText id="pesel" value="#{userFormBean.user.pesel}"  required="true" >
+					<f:validateLength minimum="11" maximum="11" />
+				</p:inputText>
+				<p:message for="pesel" />
+			</h:panelGrid>
+			<p:commandButton value="submit"
+				actionListener="#{userFormBean.addUser}" validateClient="true" />
+		</p:panel>
+	</h:form>
+
+</h:body>
+</html>

@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
 	<style type="text/css">
@@ -13,33 +14,22 @@
 
 <h:body>
 
-	<h:form>
-		<p:menubar>
-			<p:menuitem value="Users" url="users.xhtml" />
-			<p:submenu label="Books">
-				<p:menuitem value="Add new" url="book-form.xhtml" />
-				<p:menuitem value="All books" url="books.xhtml" />
-			</p:submenu>
-			<p:submenu label="Loans">
-				<p:menuitem value="New loan" url="find-user.xhtml" />
-				<p:menuitem value="Active loan" url="loan-form.xhtml" />
-				<p:menuitem value="Loans history" url="loans-history.xhtml" />
-			</p:submenu>
-		</p:menubar>
-	</h:form>
+	<ui:insert name="menu">
+		<ui:include src="/WEB-INF/menu.xhtml" />
+	</ui:insert>
 
 	<h:form id="form">
 		<p:growl id="msgs" showDetail="true" />
 
-		<p:dataTable id="users" var="user" value="#{dtUserBean.users}"
+		<p:dataTable id="users" var="user" value="#{usersBean.users}"
 			editable="true" style="margin-bottom:20px">
 			<f:facet name="header">
             Row Editing
         </f:facet>
 
-			<p:ajax event="rowEdit" listener="#{dtUserBean.onRowEdit}"
+			<p:ajax event="rowEdit" listener="#{usersBean.onRowEdit}"
 				update=":form:msgs" />
-			<p:ajax event="rowEditCancel" listener="#{dtUserBean.onRowCancel}"
+			<p:ajax event="rowEditCancel" listener="#{usersBean.onRowCancel}"
 				update=":form:msgs" />
 
 			<p:column headerText="Id">
@@ -91,7 +81,8 @@
 			<p:column style="width:55px" headerText="Aktywny">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{user.active}" />
+						<h:outputText value="#{user.active}" rendered="#{user.active}" />
+						<h:outputText value="#{user.active}" rendered="#{!user.active}" style="color:red" />
 					</f:facet>
 					<f:facet name="input">
 						<h:selectBooleanCheckbox value="#{user.active}" />
@@ -99,33 +90,19 @@
 				</p:cellEditor>
 			</p:column>
 
-
 			<p:column style="width:35px" headerText="edit">
 				<p:rowEditor />
 			</p:column>
 
-<!-- 			<p:column style="width:35px" headerText="del"> -->
-<!-- 				<p:commandButton icon="ui-icon-trash" -->
-<!-- 					actionListener="#{dtUserBean.removeUser(user.id)}" -->
-<!-- 					update=":form:msgs" onclick="PF('form').update()" /> -->
-<!-- 			</p:column> -->
+			<!-- 			<p:column style="width:35px" headerText="del"> -->
+			<!-- 				<p:commandButton icon="ui-icon-trash" -->
+			<!-- 					actionListener="#{dtUserBean.removeUser(user.id)}" -->
+			<!-- 					update=":form:msgs" onclick="PF('form').update()" /> -->
+			<!-- 			</p:column> -->
 
 		</p:dataTable>
 
-
-
 	</h:form>
-	<h:form>
-		<h3>Dodawanie nowego użytkownika</h3>
-		<p:inputText value="#{dtUserBean.user.name}" placeholder="Imię" />
-		<p:inputText value="#{dtUserBean.user.surname}" placeholder="Nazwisko" />
-		<p:inputText value="#{dtUserBean.user.pesel}" placeholder="Pesel" />
-		<p:commandButton value="submit" actionListener="#{dtUserBean.addUser}"
-			update=":form:msgs" onclick="PF('form').update()" />
-
-	</h:form>
-
 
 </h:body>
-
 </html>

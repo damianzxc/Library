@@ -1,43 +1,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
 </h:head>
 
 <h:body>
-
-	<h:form>
-		<p:menubar>
-			<p:menuitem value="Users" url="users.xhtml" />
-			<p:submenu label="Books">
-				<p:menuitem value="Add new" url="book-form.xhtml" />
-				<p:menuitem value="All books" url="books.xhtml" />
-			</p:submenu>
-			<p:submenu label="Loans">
-				<p:menuitem value="New loan" url="find-user.xhtml" />
-				<p:menuitem value="Active loan" url="loan-form.xhtml" />
-				<p:menuitem value="Loans history" url="loans-history.xhtml" />
-			</p:submenu>
-		</p:menubar>
-	</h:form>
-
-
+	<ui:insert name="menu">
+		<ui:include src="/WEB-INF/menu.xhtml" />
+	</ui:insert>
 
 	<h:form id="form">
 		<p:growl id="msgs" showDetail="true" />
 
-		<p:dataTable id="books" var="book" value="#{bookController.books}"
+		<p:dataTable id="books" var="book" value="#{booksBean.books}"
 			editable="true" style="margin-bottom:20px">
 			<f:facet name="header">
             Books
         </f:facet>
 
-			<p:ajax event="rowEdit" listener="#{bookController.onRowEdit}"
+			<p:ajax event="rowEdit" listener="#{booksBean.onRowEdit}"
 				update=":form:msgs" />
 			<p:ajax event="rowEditCancel"
-				listener="#{bookController.onRowCancel}" update=":form:msgs" />
+				listener="#{booksBean.onRowCancel}" update=":form:msgs" />
 
 			<p:column headerText="Id">
 				<p:cellEditor>
@@ -110,14 +97,14 @@
 					<f:facet name="output">
 						<h:outputText value="#{book.active}" />
 					</f:facet>
-					<f:facet name="input">
+					<f:facet name="input" >
 						<h:selectBooleanCheckbox value="#{book.active}" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
 
 			<p:column style="width:35px" headerText="edit">
-				<p:rowEditor />
+				<p:rowEditor rendered="#{book.active}" />
 			</p:column>
 
 		</p:dataTable>

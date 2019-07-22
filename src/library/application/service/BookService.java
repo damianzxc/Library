@@ -11,7 +11,7 @@ import library.application.dao.BookDao;
 import library.application.model.Book;
 import library.application.model.Status;
 
-@ManagedBean
+@ManagedBean(name = "bookService")
 @ApplicationScoped
 public class BookService {
 
@@ -59,6 +59,5 @@ public class BookService {
 	public Book findBookById(String id) {
 		return dao.findById(id);
 	}
-
 	
 }

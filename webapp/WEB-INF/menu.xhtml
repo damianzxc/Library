@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<body>
+	<ui:composition>
+		<h:form>
+			<p:menubar>
+				<p:submenu label="Użytkownicy">
+				<p:menuitem value="Znajdź" url="find-user.xhtml" />
+					<p:menuitem value="Wszyscy" url="users.xhtml" />
+					<p:menuitem value="Dodaj nowego" url="user-form.xhtml" />
+				</p:submenu>
+				<p:submenu label="Książki">
+					<p:menuitem value="Dodaj nową" url="book-form.xhtml" />
+					<p:menuitem value="Wszystkie książki" url="books.xhtml" />
+				</p:submenu>
+				<p:submenu label="Wypożyczenia">
+					<p:menuitem value="Aktywne" url="loans-active.xhtml" />
+					<p:menuitem value="Wszystkie" url="loans-history.xhtml" />
+				</p:submenu>
+				<p:submenu rendered="#{findUserBean.sessionUser.id != null}"
+					label="#{findUserBean.sessionUser.name} #{findUserBean.sessionUser.surname}">
+					<p:menuitem value="Nowe" url="loan-form.xhtml" />
+					<p:menuitem value="Aktywne" url="user-loans.xhtml" />
+					<p:menuitem value="Historia" url="user-loans-history.xhtml" />
+					<p:menuitem value="Wyloguj" action="#{findUserBean.clearSession()}" />
+				</p:submenu>
+			</p:menubar>
+		</h:form>
+	</ui:composition>
+</body>
+</html>

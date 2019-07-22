@@ -1,5 +1,6 @@
-package library.application.controller;
+package bean;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -14,30 +15,25 @@ import org.primefaces.event.RowEditEvent;
 import library.application.model.Book;
 import library.application.service.BookService;
 
-@ManagedBean
-public class BookController implements Serializable{
+@ManagedBean(name = "booksBean")
+public class Books implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4706009594400864320L;
 	
-	private List<Book> books;
 	private Book book;
+	private List<Book> books;
 	
 	@ManagedProperty("#{bookService}")
 	private BookService service;
-	
-	@PostConstruct
-	public void init() {
-		System.out.println("init from BookController");
-		books = service.findAll();
-		book = new Book();
-	}
 	
 	public void setService(BookService service) {
 		this.service = service;
 	}
 
-	public List<Book> getBooks() {
-		return books;
+	@PostConstruct
+	public void init() {
+		book = new Book();
+		books = service.findAll();
 	}
 	
 	public Book getBook() {
@@ -48,33 +44,20 @@ public class BookController implements Serializable{
 		this.book = book;
 	}
 
-	public List<String> getStatuses() {
-		return service.getStatuses();
+	public List<Book> getBooks() {
+		return books;
 	}
 	
-	public void onRowEdit(RowEditEvent event) {
+	public void onRowEdit(RowEditEvent event) throws InterruptedException, IOException {
 		book = (Book) event.getObject();
 		String message = service.updateBook(book);
 		FacesMessage msg = new FacesMessage(message, book.getName());
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-		init();
 	}
 	
 	public void onRowCancel(RowEditEvent event) {
-		FacesMessage msg = new FacesMessage("Edit Cancelled", ((Book) event.getObject()).getId());
+		FacesMessage msg = new FacesMessage("Anulowano", ((Book) event.getObject()).getName());
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-		init();
 	}
-	
-	public void addBook() {
-		service.addBook(this.book);
-		init();
-	}
-	
-	public void removeBook() {
-		service.removeBook(this.book);
-		FacesMessage msg = new FacesMessage("Book removed", book.getId());
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-		init();
-	}
+
 }

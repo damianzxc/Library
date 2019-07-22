@@ -2,7 +2,6 @@ package library.application.service;
 
 import java.util.List;
 
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
@@ -10,7 +9,6 @@ import library.application.dao.UserDao;
 import library.application.model.User;
 
 @ManagedBean(name = "userService")
-@ApplicationScoped
 public class UserService {
 
 	@ManagedProperty("#{userDao}")
@@ -45,9 +43,9 @@ public class UserService {
 
 
 	public User findUserByPesel(String pesel) {
-		User user = new User();
-		user = dao.findUserByPesel(pesel);
-		return user;
+//		User user = new User();
+		return dao.findUserByPesel(pesel);
+//		return user;
 	}
 
 	public User findUserById(String id) {

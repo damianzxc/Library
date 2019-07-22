@@ -45,6 +45,13 @@ public class LoanDao extends BaseDao implements Dao<Loan> {
 
 	@Override
 	public Loan findById(String id) {
+		String query = "SELECT * FROM LOANS WHERE ID LIKE ?;";
+		List<Object> params = new ArrayList<Object>();
+		params.add(id);
+		List<Loan> loans = create(super.get(query, params));
+		if (loans.size() > 0) {
+			return loans.get(0);
+		}
 		return null;
 	}
 
@@ -103,6 +110,20 @@ public class LoanDao extends BaseDao implements Dao<Loan> {
 		params.add(status);
 		params.add(id);
 		super.execute(query, params);
+	}
+
+	public List<Loan> findAllInactiveByUserId(String userId) {
+		String query = "SELECT * FROM LOANS WHERE ACTIVE = FALSE AND USER_ID LIKE ?;";
+		List<Object> params = new ArrayList<Object>();
+		params.add(userId);
+		List<Loan> loans = create(super.get(query, params));
+		return loans;
+	}
+
+	public List<Loan> findAllActive() {
+		String query = "SELECT * FROM LOANS WHERE ACTIVE = TRUE";
+		List<Loan> loans = create(super.get(query, null));
+		return loans;
 	}
 
 	

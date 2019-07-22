@@ -11,8 +11,9 @@
 		<ui:include src="/WEB-INF/menu.xhtml" />
 	</ui:insert>
 
-	<h:form>
-		<p:dataTable var="loan" value="#{loansHistoryBean.allLoans}" rows="10"
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
+		<p:dataTable var="loan" value="#{userLoansBean.loans}" rows="10"
 			paginator="true"
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="5,10,15">
@@ -32,22 +33,25 @@
 				<h:outputText value="#{loan.user.name}" /> - 
 				<h:outputText value="#{loan.user.surname}" />
 			</p:column>
-			
+
 			<p:column headerText="Id użytkownika">
 				<h:outputText value="#{loan.user.id}" />
 			</p:column>
-			
+
 			<p:column headerText="Data wypożyczenia">
 				<h:outputText value="#{loan.rentalDate}" />
 			</p:column>
-			
-			<p:column headerText="Data zwrotu">
-				<h:outputText value="#{loan.realReturnDate}" />
-			</p:column>
+
 			<p:column headerText="Statut">
 				<h:outputText value="Do zwrotu" style="color:red"
 					rendered="#{loan.active}" />
 				<h:outputText value="Zwrócona" rendered="#{!loan.active}" />
+			</p:column>
+
+			<p:column headerText="Usuń" style="width:40px">
+				<p:commandButton icon="ui-icon ui-icon-trash" process="@this"
+					update=":form:msgs" action="#{userLoansBean.remove(loan.id)}"
+					onclick="PF('form').update();" />
 			</p:column>
 
 			<f:facet name="paginatorTopLeft">

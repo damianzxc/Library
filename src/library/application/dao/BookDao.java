@@ -64,7 +64,11 @@ public class BookDao extends BaseDao implements Dao<Book>{
 		List<Object> params = new ArrayList<Object>();
 		params.add(id);
 		List<Book> books = create(super.get(query, params));
-		return books.get(0);
+		if (books.size() > 0) {
+			return books.get(0);
+		} else {
+			return null;
+		}
 	}
 
 	@Override
