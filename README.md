@@ -60,30 +60,37 @@ Project uses the **JSF Primefaces** and **postgresql** database
   create tadabase and tables for library  
   [file](https://github.com/damianzxc/Library/blob/master/sql.txt)
 
-DATABASE library
+DATABASE: library
         
-TABLE users  
-	id VARCHAR primary key  
-	name VARCHAR  
-	surname VARCHAR  
-	pesel VARCHAR  
+TABLES:  
+users  
+	id VARCHAR(8) primary key  
+	name VARCHAR(25)  
+	surname VARCHAR(25)  
+	pesel VARCHAR(25)  
 	active BOOL  
 
-TABLE books  
-	id VARCHAR primary key  
-	name VARCHAR  
-	describe VARCHAR  
-	author VARCHAR  
-	publisher VARCHAR  
+books  
+	id VARCHAR(8) primary key  
+	name VARCHAR(25)  
+	describe VARCHAR(255)  
+	author VARCHAR(25)  
+	publisher VARCHAR(25)  
 	release_date DATE  
-	status VARCHAR  
+	status VARCHAR(25)  
 	active BOOL  
 
-TABLE loans  
-	id VARCHAR  
-	book_id VARCHAR foreign key (books.id)  
-	user_id VARCHAR foreign key (users.id)  
+loans  
+	id VARCHAR(8)  
+	book_id VARCHAR(8) foreign key (books.id)  
+	user_id VARCHAR(8) foreign key (users.id)  
 	rental_date DATE  
 	expected_return_date DATE  
 	real_return_date DATE  
 	active BOOL  
+
+## run application
+1. put the war file in your tomcat server's webapp directory  
+	-> run or restart tomcat server  
+	-> go localhost:8080/Library  
+2. download project and import it in IDE (eclipse or other)
