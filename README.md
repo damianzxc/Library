@@ -60,6 +60,7 @@ Project uses the **JSF Primefaces** and **postgresql** database
   create tadabase and tables for library  
   [file](https://github.com/damianzxc/Library/blob/master/sql.txt)
 
+```sql
 DATABASE: library
         
 TABLES:  
@@ -88,7 +89,7 @@ loans
 	expected_return_date DATE  
 	real_return_date DATE  
 	active BOOL  
-
+```
 ## run application
 1. put the [war](https://github.com/damianzxc/Library/blob/master/Library.war) file in your tomcat server's webapp directory  
 	-> run or restart tomcat server  
