@@ -3,7 +3,7 @@ A simple application to operate the library
 Project uses the **JSF Primefaces** and **postgresql** database
 
 ## pom.xml
-
+```java
 	<dependencies>
 
 		<!-- Java Server Faces -->
@@ -50,7 +50,7 @@ Project uses the **JSF Primefaces** and **postgresql** database
     		<scope>provided</scope>
 		</dependency>
 	</dependencies>
-  
+  ```
   ## requirements
   
   - [postgres](https://www.postgresql.org/download/) database  
