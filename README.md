@@ -93,7 +93,8 @@ loans
 1. put the [war](https://github.com/damianzxc/Library/blob/master/Library.war) file in your tomcat server's webapp directory  
 	-> run or restart tomcat server  
 	-> go [localhost:8080/Library](http://localhost:8080/Library) to see application
-2. download project and import it in IDE (eclipse or other)
-	-> add server tomcat
-	-> run application
+2. download project and import it in IDE (eclipse or other)  
+	-> add server tomcat  
+	-> run application  
 
+<img src="https://github.com/damianzxc/Library/blob/master/library_example.jpg" alt="library example"/>
