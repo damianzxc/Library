@@ -1,0 +1,56 @@
+
+
+DROP DATABASE library;
+
+CREATE DATABASE library
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'en_US.UTF-8'
+    LC_CTYPE = 'en_US.UTF-8'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+    
+    
+CREATE TABLE users (
+	id VARCHAR(10) NOT NULL,
+	name VARCHAR(25) NOT NULL,
+	surname VARCHAR(25) NOT NULL,
+	pesel VARCHAR(25) NOT NULL,
+	active BOOL,
+	CONSTRAINT users_pkey PRIMARY KEY(id)
+);
+
+CREATE TABLE books (
+	id VARCHAR(10) NOT NULL,
+	name VARCHAR(25) NOT NULL,
+	describe VARCHAR(255) NOT NULL,
+	author VARCHAR(25),
+	publisher VARCHAR(25),
+	release_date DATE,
+	status VARCHAR(25),
+	active BOOL,
+	CONSTRAINT books_pkey PRIMARY KEY(id)
+);
+
+
+CREATE TABLE loans (
+	id VARCHAR(10) NOT NULL,
+	book_id VARCHAR(10) NOT NULL,
+	user_id VARCHAR(10) NOT NULL,
+	rental_date DATE,
+	expected_return_date DATE,
+	real_return_date DATE,
+	active BOOL,
+	CONSTRAINT loans_pkey PRIMARY KEY(id),
+	CONSTRAINT loans_fkey_books FOREIGN KEY (book_id)
+		REFERENCES books(id),
+	CONSTRAINT loans_fkey_users FOREIGN KEY (user_id)
+		REFERENCES users(id)
+);
+
+
+
+
+
+
